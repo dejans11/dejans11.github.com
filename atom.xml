@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[dejans11 rants]]></title>
+  <link href="http://dejans11.github.com/atom.xml" rel="self"/>
+  <link href="http://dejans11.github.com/"/>
+  <updated>2013-02-16T17:41:03+01:00</updated>
+  <id>http://dejans11.github.com/</id>
+  <author>
+    <name><![CDATA[Dejan Križan]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Starting blogging with Octopress]]></title>
+    <link href="http://dejans11.github.com/starting-blogging-with-octopress/"/>
+    <updated>2013-02-16T17:19:00+01:00</updated>
+    <id>http://dejans11.github.com/starting-blogging-with-octopress</id>
+    <content type="html"><![CDATA[<p>Bunch of these first posts of a blogger starts with &#8220;I was meant to start blogging for a long time&#8230;&#8221;.
+While this is true, I will start with a problem I had when trying to configure Octopress for the first time on Windows OS.
+I am from Serbia and my surname has some special characters from Serbian Latin.
+The character in question was letter &#8220;ž&#8221; and after putting it in _config.yml file and running &#8220;rake generate&#8221; i received following error:</p>
+
+<p>c:/Ruby193/lib/ruby/1.9.1/psych.rb:203:in `parse&#8217;: (d:/programming/ruby/dejans11-blog/octopress/_config.yml): invalid leading UTF-8 octet at line 1 column 1 (Psych::SyntaxError)</p>
+
+<p>Obviously some problem with encoding. I checked _config.yml in Notepad++ and encoding was indeed ANSI.
+I changed it to UTF-8 and it worked.
+Next I created first post with new_post task.
+Since I had trouble with encoding at start, first thing I tried is to set some content with special characters from Serbian Latin.
+I checked the encoding of the generated file and according to Notepad++ it was ANSI.
+I added some special characters to it and run &#8220;rake generate&#8221;.
+I got this error:</p>
+
+<p>YAML Exception reading post.markdown: invalid byte sequence in UTF-8</p>
+
+<p>I changed encoding to UTF-8, run &#8220;rake generate&#8221; and everything seemed it went fine.
+I run &#8220;rake preview&#8221; (starting local ruby server on localhost:4000 so you can inspect what is generated)
+and I noticed that content wasn&#8217;t correct. It was part of the file meant for setting up post parameters (default are: layout, title, date, comments, categories).
+Hmm, so it seems that changing to UTF-8 wasn&#8217;t working.
+After googling a little bit I found that many had the same problem and there were several resolutions.
+For me changing encoding of a post to UTF-8 without BOM fixed the problem.</p>
+
+<p>So now I have a working blog (as you can see).</p>
+]]></content>
+  </entry>
+  
+</feed>
