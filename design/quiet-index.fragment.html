@@ -1,0 +1,119 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap');
+#quiet-personal{--page-ink:#515961;--page-muted:#69747d;--page-accent:#526f8d;--page-line:#e5e9ec;--page-heading:44px;color-scheme:light;background:#ffffff;color:var(--page-ink);font:400 14px/1.7 'DM Sans',sans-serif;padding:30px 42px;min-height:610px;display:flex;flex-direction:column;box-sizing:border-box;}
+#quiet-personal *{box-sizing:border-box;}
+#quiet-personal [hidden]{display:none!important;}
+#quiet-personal h1,#quiet-personal h2,#quiet-personal h3,#quiet-personal p{margin:0;}
+#quiet-personal a{color:inherit;text-decoration:none;}
+#quiet-personal a:hover{color:var(--page-accent);}
+#quiet-personal .page-top{padding-bottom:23px;border-bottom:1px solid var(--page-line);display:flex;justify-content:space-between;align-items:center;gap:20px;}
+#quiet-personal .page-name{font-weight:500;font-size:14px;}
+#quiet-personal .back-home{font-size:12px;color:var(--page-accent);}
+#quiet-personal .page-main{width:100%;max-width:530px;margin:0 auto;padding:52px 0 43px;flex:1;}
+#quiet-personal .eyebrow{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--page-muted);margin-bottom:19px;}
+#quiet-personal h1{font-size:var(--page-heading);line-height:1.2;font-weight:400;letter-spacing:-1.5px;overflow-wrap:anywhere;}
+#quiet-personal .bio{font-size:15px;line-height:1.9;color:var(--page-muted);max-width:395px;margin-top:24px;}
+#quiet-personal .destinations{margin-top:39px;border-top:1px solid var(--page-line);padding-top:22px;}
+#quiet-personal .project-link{display:inline-flex;gap:14px;align-items:center;font-size:21px;line-height:1.5;}
+#quiet-personal .project-link svg{width:16px;height:16px;color:var(--page-accent);}
+#quiet-personal .destination-description{font-size:13px;line-height:1.8;color:var(--page-muted);margin-top:4px;}
+#quiet-personal .fun-branch{margin:22px 0 0 9px;border-left:1px solid var(--page-line);padding:0 0 0 22px;}
+#quiet-personal .fun-link{font-size:16px;display:inline-flex;align-items:center;gap:12px;line-height:1.5;}
+#quiet-personal .fun-link svg{width:14px;height:14px;color:var(--page-accent);}
+#quiet-personal .page-footer{border-top:1px solid var(--page-line);padding-top:19px;font-size:11px;color:var(--page-muted);}
+#quiet-personal .listing{padding-top:25px;margin-top:29px;border-top:1px solid var(--page-line);}
+#quiet-personal .listing article+article{margin-top:26px;}
+#quiet-personal .listing h2{font-size:18px;line-height:1.5;font-weight:400;letter-spacing:-.2px;}
+#quiet-personal .listing p{font-size:13px;line-height:1.8;color:var(--page-muted);margin-top:6px;}
+#quiet-personal .section-link{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--page-accent);margin-top:25px;}
+#quiet-personal .section-link svg{width:14px;height:14px;}
+@media(max-width:580px){
+ #quiet-personal{padding:24px;min-height:620px;}
+ #quiet-personal .page-main{padding:41px 0 35px;}
+ #quiet-personal h1{font-size:clamp(30px,8vw,var(--page-heading));letter-spacing:-1px;}
+ #quiet-personal .bio{font-size:14px;}
+ #quiet-personal .destinations{margin-top:32px;}
+}
+@media(pointer:coarse){#quiet-personal a{min-height:44px;display:inline-flex;align-items:center;}}
+</style>
+<div id="quiet-personal" aria-label="Quiet Index personal homepage">
+ <header class="page-top">
+  <a class="page-name cursor-interaction" href="#home" data-view-link="home">Dejan Križan</a>
+  <a class="back-home cursor-interaction" href="#home" data-view-link="home" data-back hidden>← Home</a>
+ </header>
+ <main class="page-main">
+  <section data-page="home">
+   <div class="eyebrow">Hello</div>
+   <h1>Hi, I’m<br>Dejan Križan.</h1>
+   <p class="bio">I’m a software engineer based in Novi Sad, Serbia. My work focuses on backend systems, APIs, and web applications.</p>
+   <nav class="destinations" aria-label="Explore">
+    <a class="project-link cursor-interaction" href="#projects" data-view-link="projects">Projects <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+    <p class="destination-description">Things I’m working on.</p>
+    <div class="fun-branch">
+     <a class="fun-link cursor-interaction" href="#fun" data-view-link="fun">Fun <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+     <p class="destination-description">Games to play.</p>
+    </div>
+   </nav>
+  </section>
+  <section data-page="projects" hidden>
+   <div class="eyebrow">Things I’m working on</div>
+   <h1>Projects</h1>
+   <div class="listing">
+    <article><h2>Project title</h2><p>A short description of the project.</p></article>
+    <article><h2>Another project</h2><p>A short description of what it does.</p></article>
+   </div>
+   <a class="section-link cursor-interaction" href="#fun" data-view-link="fun">Fun <i data-lucide="arrow-right" aria-hidden="true"></i></a>
+  </section>
+  <section data-page="fun" hidden>
+   <div class="eyebrow">Games to play</div>
+   <h1>Fun</h1>
+   <div class="listing">
+    <article><h2>Game title</h2><p>A short description of the game.</p></article>
+    <article><h2>Another game</h2><p>A short description of how to play.</p></article>
+   </div>
+   <a class="section-link cursor-interaction" href="#projects" data-view-link="projects">← Projects</a>
+  </section>
+ </main>
+ <footer class="page-footer">Dejan Križan · 2026 · Personal website</footer>
+</div>
+<script>
+(()=>{
+ const root=document.getElementById('quiet-personal');
+ const defaults={ink:'#515961',accent:'#526f8d',heading:44,view:'home'};
+ const state={...defaults};
+ const validViews=['home','projects','fun'];
+ function apply(next){
+  if(!next||typeof next!=='object')return;
+  ['ink','accent'].forEach(key=>{if(/^#[0-9a-f]{6}$/i.test(next[key]))state[key]=next[key];});
+  if(Number.isFinite(next.heading))state.heading=Math.min(48,Math.max(34,next.heading));
+  if(validViews.includes(next.view))state.view=next.view;
+ }
+ apply(window.openai?.widgetState?.privateContent?.quietPersonal);
+ function render(){
+  root.style.setProperty('--page-ink',state.ink);
+  root.style.setProperty('--page-accent',state.accent);
+  root.style.setProperty('--page-heading',state.heading+'px');
+  root.querySelectorAll('[data-page]').forEach(page=>{page.hidden=page.dataset.page!==state.view;});
+  root.querySelector('[data-back]').hidden=state.view==='home';
+ }
+ function persist(){
+  if(window.openai?.setWidgetState)window.openai.setWidgetState({modelContent:{design:'Quiet Index',homepage:'Short bio, Projects, nested Fun link for games',appearance:{ink:state.ink,accent:state.accent,heading:state.heading}},privateContent:{quietPersonal:{...state}}}).catch(()=>{});
+ }
+ render();
+ root.addEventListener('click',event=>{
+  const link=event.target.closest('[data-view-link]');
+  if(!link||!root.contains(link))return;
+  event.preventDefault();state.view=link.dataset.viewLink;render();persist();
+ });
+ window.addEventListener('openai:set_globals',event=>{
+  const next=event.detail?.globals?.widgetState?.privateContent?.quietPersonal;
+  if(next){apply(next);render();}
+ });
+ if(globalThis.Tweak){
+  const tweak=new Tweak({container:root,onChange:()=>{render();persist();}});
+  tweak.addColorPicker(state,'ink',{label:'Text color',reference:'--page-ink'});
+  tweak.addColorPicker(state,'accent',{label:'Link accent',reference:'--page-accent'});
+  tweak.addSlider(state,'heading',{label:'Heading size',min:34,max:48,step:2,unit:'px',reference:'--page-heading'});
+ }
+})();
+</script>
