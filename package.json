@@ -1,0 +1,10 @@
+{
+  "name": "dejan-personal-site",
+  "private": true,
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "import:games": "node scripts/import-games.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "preview": "python -m http.server 8080 --bind 127.0.0.1"
+  }
+}

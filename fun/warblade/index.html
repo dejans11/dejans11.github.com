@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Warblade - Classic space shooter action game. Destroy waves of alien invaders, upgrade weapons, and battle epic bosses.">
+    <title>Warblade — Space Shooter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- HUD -->
+        <div id="hud">
+            <div id="hud-left">
+                <div class="hud-item">
+                    <span class="hud-label">SCORE</span>
+                    <span class="hud-value" id="hud-score">0</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">HI-SCORE</span>
+                    <span class="hud-value" id="hud-hiscore">0</span>
+                </div>
+            </div>
+            <div id="hud-center">
+                <div class="hud-item">
+                    <span class="hud-label">LEVEL</span>
+                    <span class="hud-value" id="hud-level">1</span>
+                </div>
+            </div>
+            <div id="hud-right">
+                <div class="hud-item">
+                    <span class="hud-label">LIVES</span>
+                    <span class="hud-value" id="hud-lives">&#9829; &#9829; &#9829;</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">CREDITS</span>
+                    <span class="hud-value" id="hud-credits">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shield bar -->
+        <div id="shield-bar-container">
+            <div id="shield-bar-label">SHIELD</div>
+            <div id="shield-bar-bg">
+                <div id="shield-bar-fill"></div>
+            </div>
+        </div>
+
+        <!-- Weapon indicator -->
+        <div id="weapon-indicator">
+            <span class="hud-label">WEAPON</span>
+            <span class="hud-value" id="hud-weapon">LV 1</span>
+        </div>
+
+        <!-- Title screen overlay -->
+        <div id="title-screen" class="overlay">
+            <div class="overlay-content">
+                <h1 id="game-title">WARBLADE</h1>
+                <p class="subtitle">SPACE COMBAT SQUADRON</p>
+                <div class="title-divider"></div>
+                <p class="prompt blink">PRESS ENTER TO START</p>
+                <div class="controls-info">
+                    <p>← → ↑ ↓ or WASD — Move</p>
+                    <p>SPACE — Fire</p>
+                    <p>P — Pause</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game over overlay -->
+        <div id="game-over" class="overlay hidden">
+            <div class="overlay-content">
+                <h1 class="game-over-title">GAME OVER</h1>
+                <p id="final-score-text">SCORE: 0</p>
+                <p id="new-hiscore-text" class="hidden glow-text">★ NEW HIGH SCORE ★</p>
+                <p class="prompt blink">PRESS ENTER TO PLAY AGAIN</p>
+            </div>
+        </div>
+
+        <!-- Shop overlay -->
+        <div id="shop-screen" class="overlay hidden">
+            <div class="overlay-content shop-content">
+                <h1 class="shop-title">SUPPLY DEPOT</h1>
+                <p id="shop-credits" class="shop-credits">CREDITS: 0</p>
+                <div class="shop-grid" id="shop-grid"></div>
+                <p class="prompt blink">PRESS ENTER TO CONTINUE</p>
+            </div>
+        </div>
+
+        <!-- Level complete -->
+        <div id="level-complete" class="overlay hidden">
+            <div class="overlay-content">
+                <h1 class="level-complete-title">WAVE CLEARED</h1>
+                <p id="level-bonus-text" class="level-bonus">BONUS: +500</p>
+                <p class="prompt">Entering Supply Depot...</p>
+            </div>
+        </div>
+
+        <!-- Pause -->
+        <div id="pause-screen" class="overlay hidden">
+            <div class="overlay-content">
+                <h1>PAUSED</h1>
+                <p class="prompt">PRESS P TO RESUME</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
