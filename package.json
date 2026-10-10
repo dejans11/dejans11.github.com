@@ -4,6 +4,8 @@
   "engines": { "node": ">=22" },
   "scripts": {
     "import:games": "node scripts/import-games.mjs",
+    "import:lale-manager": "node scripts/import-lale-manager.mjs",
+    "verify:lale-manager": "node scripts/verify-lale-manager.mjs",
     "test": "node --test tests/*.test.mjs",
     "preview": "python -m http.server 8080 --bind 127.0.0.1"
   }
