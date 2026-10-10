@@ -37,6 +37,8 @@ h1 { font-size: 44px; line-height: 1.2; font-weight: 400; letter-spacing: -1.5px
 .game-row h2 { font-size: 20px; line-height: 1.5; font-weight: 400; letter-spacing: -.3px; }
 .game-row p { font-size: 13px; line-height: 1.8; color: var(--page-muted); margin-top: 7px; max-width: 360px; }
 .game-row .controls-note { font-size: 11px; margin-top: 9px; }
+.game-preview { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+.game-thumbnail { display: block; width: 160px; height: 120px; object-fit: cover; border: 1px solid var(--page-line); border-radius: 4px; }
 .play-link { font-size: 12px; color: var(--page-accent); white-space: nowrap; }
 @media (max-width: 580px) {
   .site-page { padding: 24px; min-height: 620px; }
@@ -45,6 +47,7 @@ h1 { font-size: 44px; line-height: 1.2; font-weight: 400; letter-spacing: -1.5px
   .bio { font-size: 14px; }
   .destinations { margin-top: 32px; }
   .game-row { gap: 16px; }
+  .game-thumbnail { width: 112px; height: 84px; }
 }
 @media (pointer: coarse) {
   .page-top a, .project-link, .fun-link, .game-shortcuts a { min-height: 44px; display: inline-flex; align-items: center; }
