@@ -1,0 +1,100 @@
+:root {
+  color-scheme: dark;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #edf1f8;
+  background: #101725;
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+.preview { width: min(94%, 80rem); margin: auto; padding: 2.25rem 0 1.5rem; }
+.introduction { text-align: center; }
+.eyebrow, h1, .figure-heading, .preview-footer { font-family: "Cascadia Mono", Consolas, monospace; }
+.eyebrow { margin: 0 0 1rem; color: #aec2db; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+h1 {
+  margin: 0;
+  color: #ffafc9;
+  font-size: clamp(1.25rem, calc(1rem + 2vw), 3.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+  text-shadow: 3px 3px #40243b;
+}
+h1 span { display: block; margin-top: 0.35rem; color: #edf1f8; font-size: 0.7em; }
+.tagline { margin: 1rem 0 1.75rem; color: #bfd0e4; line-height: 1.6; }
+.scene-panel { min-width: 0; }
+.figure-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.75rem; padding: 0 0.15rem 0.75rem; }
+.figure-heading h2 { margin: 0; color: #c5d5e8; font-size: 0.8rem; font-weight: 500; }
+.preview-label { padding: 0.35rem 0.6rem; border: 1px solid #497b79; color: #aae5d6; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.scene-frame { padding: 0.5rem; border: 1px solid #394b65; background: #172235; box-shadow: 0 1.5rem 4rem #070e1980; }
+canvas, .static-fallback { display: block; width: 100%; height: auto; background: #101725; image-rendering: pixelated; }
+canvas { aspect-ratio: 16 / 9; touch-action: manipulation; }
+body:has(noscript .static-fallback) .scene-frame { display: none; }
+body:has(noscript .static-fallback) .scene-controls button,
+body:has(noscript .static-fallback) .mode-panel,
+body:has(noscript .static-fallback) #game-metrics,
+body:has(noscript .static-fallback) .best-score,
+body:has(noscript .static-fallback) #preview-status { display: none; }
+canvas[data-phase="LANDED"], canvas[data-phase="ENCOUNTER"] { cursor: pointer; }
+.game-metrics { display: flex; flex-wrap: wrap; gap: 0.75rem 2rem; margin-top: 1rem; color: #aec2db; font-size: 0.85rem; }
+.game-metrics p { margin: 0; }
+.game-metrics strong { margin-left: 0.4rem; color: #edf1f8; font-family: Consolas, monospace; }
+.best-score { margin-top: 1rem; color: #aec2db; font-size: 0.9rem; }
+.best-score > p { margin: 0; }
+.best-score strong { margin-left: 0.4rem; color: #aae5d6; font-family: Consolas, monospace; }
+.scene-controls { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.25rem; }
+.round-controls { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.mode-panel { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-top: 1.25rem; padding: 1.5rem; border: 2px solid #735169; background: #1b263a; }
+.mode-panel > div { min-width: 0; max-width: 48rem; }
+.mode-panel .eyebrow { margin-bottom: 0.5rem; }
+.mode-panel h2 { margin: 0; color: #ffafc9; font-family: Consolas, monospace; font-size: clamp(1.25rem, 2vw, 1.75rem); }
+.mode-panel p { line-height: 1.6; overflow-wrap: anywhere; }
+.mode-panel .instructions { margin-bottom: 0; color: #bfd0e4; font-size: 0.9rem; }
+.mode-panel button { flex-shrink: 0; }
+.results-metrics { display: flex; flex-wrap: wrap; gap: 1rem 2rem; margin-bottom: 0; }
+.results-metrics dt { font-size: 0.8rem; color: #bfd0e4; }
+.results-metrics dd { margin: 0.25rem 0 0; font: bold 1.5rem Consolas, monospace; color: #aae5d6; }
+button, .reference-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 2.8rem;
+  max-width: 100%;
+  padding: 0.7rem 1rem;
+  border: 2px solid #ffafc9;
+  background: #ffafc9;
+  color: #1c1830;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.reference-link { margin-left: auto; border-color: #586c89; background: #172235; color: #d0def0; }
+.secondary-button { border-color: #586c89; background: #172235; color: #d0def0; }
+.concept-link { color: #aec2db; text-underline-offset: 0.25rem; }
+button:hover:enabled { border-color: #ffe1ec; background: #ffe1ec; color: #1c1830; }
+.reference-link:hover { border-color: #aec2db; background: #25334a; }
+button:disabled { opacity: 0.5; cursor: default; }
+button:focus-visible, .reference-link:focus-visible, .concept-link:focus-visible, #results-heading:focus-visible { outline: 3px solid #a9e9df; outline-offset: 4px; }
+.status { margin: 0.9rem 0 0; color: #b4c0d0; font-size: 0.85rem; line-height: 1.6; overflow-wrap: anywhere; }
+.status[data-state="ready"] { color: #aae5d6; }
+.status[data-state="error"] { color: #ffafc9; }
+.scope-note { margin: 0.5rem 0 0; color: #b4c0d0; font-size: 0.85rem; line-height: 1.6; }
+.preview-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #2d3a50; color: #a8b9cf; font-size: 0.7rem; line-height: 1.5; }
+@media (max-width: 600px) {
+  .preview { width: 92%; padding-top: 1.75rem; }
+  .reference-link { margin-left: 0; }
+  .scene-controls > * { flex-grow: 1; }
+  .round-controls { width: 100%; }
+  .round-controls > * { flex-grow: 1; }
+  .mode-panel { flex-direction: column; align-items: stretch; padding: 1rem; gap: 1rem; }
+}
+@media (forced-colors: active) {
+  button, .reference-link, .preview-label, .scene-frame { border-color: ButtonText; }
+  button:focus-visible, .reference-link:focus-visible { outline-color: Highlight; }
+}
