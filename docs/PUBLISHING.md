@@ -76,6 +76,8 @@ This copies `index.html`, `main.js`, `style.css`, and `favicon.svg` to `fun/tict
 
 The source game folder also contains a README with these update instructions. If you add a game asset, add it to the PowerShell script's `$files` list. Keep runtime paths relative to the game directory.
 
+The [TicTacToe publishing guide](TICTACTOE.md) gives the complete export, preview, commit, and approved-push sequence, including how to refresh its gameplay screenshot.
+
 ## Preview and check
 
 With Python 3 installed:

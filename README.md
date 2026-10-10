@@ -42,6 +42,8 @@ TicTacToe has a simple PowerShell export that also works without Node.js:
 
 Rerun the export after game changes, preview, then review and commit the website update. Publishing requires an explicitly approved push.
 
+See [the TicTacToe publishing guide](docs/TICTACTOE.md) for the complete update steps and screenshot instructions.
+
 See [Publishing and updating the games](docs/PUBLISHING.md) for the full procedure, GitHub Pages settings, and troubleshooting.
 
 ## Site files
