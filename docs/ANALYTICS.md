@@ -22,6 +22,7 @@ Each tracked HTML page contains one deferred reference to `/assets/analytics.js`
 - `/fun/blobs/`
 - `/fun/warblade/`
 - `/fun/tictactoe/`
+- `/fun/lale-manager/` (Footsi; prepared locally, pending approved publication)
 - `/fun/tanja/` (Girl in Fire; prepared locally, pending approved publication)
 
 The privacy page, design previews, and legacy Octopress pages are not instrumented. The absolute loader path assumes this personal site is published at the domain root.
@@ -43,6 +44,8 @@ For TicTacToe, use the website-owned PowerShell exporter:
 ```
 
 It defaults to this website's root as `SitePath`; specify `-SitePath` for another checkout. It validates the required files and HTML head, rejects linked output directories, copies the four runtime files, and adds the same loader to the website HTML. It requires PowerShell, with no Node.js dependency. Do not use the source folder's older `export-pages.ps1`: it copies the uninstrumented HTML over the published copy.
+
+For Footsi (source project Retro Football Manager), use `npm run import:lale-manager -- --source <built-dist-folder>`. Its website HTML receives the public name, shared loader and a privacy link; the source and downloadable offline ZIP remain untouched. It sends pageviews only, with no careers, scores, moves or transfer bids. The existing `/fun/lale-manager/` URL remains in use. See [Footsi updates](LALE-MANAGER.md).
 
 See [publishing games](PUBLISHING.md) and [TicTacToe updates](TICTACTOE.md).
 

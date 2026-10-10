@@ -1,6 +1,6 @@
 # Publishing and updating the games
 
-This public repository hosts the profile and browser games on GitHub Pages. The Blobs and Warblade source repositories stay private; TicTacToe is exported from its local game folder. Updating a game means exporting its runtime files here, testing them, then pushing this repository after explicit approval.
+This public repository hosts the profile and browser games on GitHub Pages. The Blobs and Warblade source repositories stay private; TicTacToe is exported from its local game folder, and Retro Football Manager from its built artifacts. Updating a game means exporting its runtime files here, testing them, then pushing this repository after explicit approval.
 
 ## GitHub Pages setup
 
@@ -64,6 +64,22 @@ Do not edit the exported game files directly: the next export replaces them. Mak
 
 The deployed JavaScript and assets remain public and downloadable because the browser needs them to play. Keeping the repositories private preserves their history and development files; it does not hide shipped browser code.
 
+## Export Footsi
+
+Build and test the game in its source folder, then export its `dist` artifacts from this website repository:
+
+Footsi is the website name for Retro Football Manager (`lale-manager`). The existing runtime URL and browser saves remain compatible; the exporter applies the website title/heading on every update.
+
+```powershell
+npm run import:lale-manager -- --source "C:\dev\games\lale-manager\dist"
+```
+
+This adds the built HTML and unchanged offline ZIP to `fun/lale-manager/`, adds website navigation/shared analytics only to the public HTML, and records SHA-256 release hashes in the existing manifest. Supply `--screenshot <PNG>` to update the gallery image. The source does not need Git initialization or a commit to prepare a local artifact export; source/private files and career saves are excluded. No commits or pushes occur. See [the full game publishing guide](LALE-MANAGER.md) for update steps, browser save portability and verification.
+
+The game's `npm run prepare:web -- --site <website-folder>` runs tests/build/export/website tests/verification together and stops on failure. Alternatively, after the manual export run `npm test` and `npm run verify:lale-manager` here. After an approved publishing push and successful Pages deployment, run `npm run verify:lale-manager -- --url https://dejans11.github.io/fun/lale-manager/` to compare live game/ZIP/screenshot hashes, release metadata and homepage/gallery links against the local release. These scripts never commit or push.
+
+Footsi is prepared locally; its initial website commits are approved, and remote publication awaits approval of the exact push. Its development chat and source-side publishing handoff are linked in [the game publishing guide](LALE-MANAGER.md). Update both guides before preparing a release; the offline ZIP also contains the source README, so changes to that README require rebuilding and exporting.
+
 ## Export Girl in Fire (Tanja)
 
 The prepared static game uses the public name **Girl in Fire** at `/fun/tanja/`. From this website root, run `npm run import:games -- --tanja "C:\dev\games\tanja"` against a clean committed source checkout. Source allowlist/asset hashes select 29 runtime files; hosted HTML alone gains the name, privacy link and shared Umami loader. The original concept/link stay only in the separate offline package. Sound starts off on every load.
@@ -97,6 +113,7 @@ Open http://127.0.0.1:8080/, follow **Fun**, and test the games. Also open each 
 - http://127.0.0.1:8080/fun/blobs/
 - http://127.0.0.1:8080/fun/warblade/
 - http://127.0.0.1:8080/fun/tictactoe/
+- http://127.0.0.1:8080/fun/lale-manager/
 - http://127.0.0.1:8080/fun/tanja/
 
 Blobs: select a blob and jump to a highlighted landing cell. Check the help and level controls.
@@ -107,17 +124,22 @@ TicTacToe: take turns clicking or tapping empty squares. Check a win, a draw, an
 
 Check the browser console and network panel for JavaScript errors or missing files. Stop the preview with Ctrl+C.
 
-The tracked public pages should each load `/assets/analytics.js` once. Local previews must not request `cloud.umami.is`. The exporters preserve the loader after updates. See [analytics verification](ANALYTICS.md#verify-collection) for production checks and owner opt-out.
+The tracked public pages should each load `/assets/analytics.js` once. Local previews must not request `cloud.umami.is`. The exporters preserve the loader after updates; the Retro Football Manager offline ZIP has none. See [analytics verification](ANALYTICS.md#verify-collection) for production checks and owner opt-out.
 
 ## Publish
 
-Run this sequence on `master`. If you made the update on a feature branch, commit there and integrate it into `master` before pushing `master`. Review and commit the exported files, version manifest, screenshots, and any catalogue or homepage changes. Push only after explicitly approving the repository, branch, and commits:
+Review the exported files, version manifest, screenshots, catalogue/homepage changes, tooling and documentation:
 
 ```powershell
 git status --short
 git diff --stat
-git add fun/ assets/games/ index.html
-git commit -m "Update browser game releases"
+```
+
+Stage only the reviewed release changes, including the relevant parts of shared files. Preserve concurrent work on other games and honor any project-specific hold on commits. Footsi's game Git initialization and local game/website commits were approved on 10 October 2026. If working on a feature branch, integrate the approved changes into `master` before publishing.
+
+Once the local commits are ready, identify this repository (`dejans11/dejans11.github.com`), the `master` branch and their exact hashes in ordinary chat. Include every unpublished commit on that branch, including releases of other games. Wait for approval of that specific push. After approval, run:
+
+```powershell
 git push origin master
 ```
 
