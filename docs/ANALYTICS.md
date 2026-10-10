@@ -22,6 +22,7 @@ Each tracked HTML page contains one deferred reference to `/assets/analytics.js`
 - `/fun/blobs/`
 - `/fun/warblade/`
 - `/fun/tictactoe/`
+- `/fun/tanja/` (Girl in Fire; prepared locally, pending approved publication)
 
 The privacy page, design previews, and legacy Octopress pages are not instrumented. The absolute loader path assumes this personal site is published at the domain root.
 
@@ -45,6 +46,8 @@ It defaults to this website's root as `SitePath`; specify `-SitePath` for anothe
 
 See [publishing games](PUBLISHING.md) and [TicTacToe updates](TICTACTOE.md).
 
+For Girl in Fire (Tanja), use `npm run import:games -- --tanja <clean-committed-checkout>`. Hosted HTML gains the shared loader/privacy link and public name; the source/offline package retains the concept and no analytics. Sound starts off on every load. Best scores stay local; no game actions, audio settings or scores are submitted. Local/controlled-host checks pass; live dashboard reception is pending. See [Girl in Fire publishing](TANJA.md).
+
 ## Exclude your own visits
 
 On `https://dejans11.github.io/`, open the browser developer console and run:
@@ -53,7 +56,7 @@ On `https://dejans11.github.io/`, open the browser developer console and run:
 localStorage.setItem('umami.disabled', '1');
 ```
 
-Reload. Umami stops sending analytics in that browser profile for this origin, including all six tracked paths. The external script can still load; the flag disables collection. Visits before setting the flag may already have been recorded. Set it separately in each browser/profile you use; clearing site storage removes it.
+Reload. Umami stops sending analytics in that browser profile for this origin, including all tracked paths. The external script can still load; the flag disables collection. Visits before setting the flag may already have been recorded. Set it separately in each browser/profile you use; clearing site storage removes it.
 
 To temporarily allow a verification visit:
 
@@ -69,7 +72,7 @@ Before publication:
 
 1. Run `npm test`. The tests cover loader eligibility, duplicate initialization, Do Not Track, and game export preservation. The TicTacToe tests run when PowerShell is available; they report a skip otherwise.
 2. Preview with `python -m http.server 8080 --bind 127.0.0.1`.
-3. Open all six pages. Each should load `/assets/analytics.js` once and make no request to `cloud.umami.is` locally.
+3. Open all tracked pages. Each should load `/assets/analytics.js` once and make no request to `cloud.umami.is` locally.
 4. Check that the games, screenshot modal, and footer privacy links work. The privacy page should have no analytics loader.
 5. Review and commit the changes locally. Obtain explicit approval of the repository, branch, and commits before pushing. This also applies to private game repositories.
 

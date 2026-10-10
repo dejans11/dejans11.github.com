@@ -1,6 +1,6 @@
 # Publishing and updating the games
 
-This public repository hosts the profile and the playable browser versions of Blobs, Warblade, and TicTacToe on GitHub Pages. The Blobs and Warblade source repositories stay private; TicTacToe is exported from its local game folder. Updating a game means exporting its runtime files here, testing them, then pushing this repository after explicit approval.
+This public repository hosts the profile and browser games on GitHub Pages. The Blobs and Warblade source repositories stay private; TicTacToe is exported from its local game folder. Updating a game means exporting its runtime files here, testing them, then pushing this repository after explicit approval.
 
 ## GitHub Pages setup
 
@@ -64,6 +64,12 @@ Do not edit the exported game files directly: the next export replaces them. Mak
 
 The deployed JavaScript and assets remain public and downloadable because the browser needs them to play. Keeping the repositories private preserves their history and development files; it does not hide shipped browser code.
 
+## Export Girl in Fire (Tanja)
+
+The prepared static game uses the public name **Girl in Fire** at `/fun/tanja/`. From this website root, run `npm run import:games -- --tanja "C:\dev\games\tanja"` against a clean committed source checkout. Source allowlist/asset hashes select 29 runtime files; hosted HTML alone gains the name, privacy link and shared Umami loader. The original concept/link stay only in the separate offline package. Sound starts off on every load.
+
+Preview/test/review before committing. This phase prepares files locally. See [Girl in Fire update, acceptance and rollback](TANJA.md). The exporter preserves other games/version entries and never commits or pushes.
+
 ## Export TicTacToe
 
 TicTacToe already uses plain HTML, CSS, and JavaScript. It needs neither a Node.js server nor an npm build. From this website repository, run:
@@ -91,6 +97,7 @@ Open http://127.0.0.1:8080/, follow **Fun**, and test the games. Also open each 
 - http://127.0.0.1:8080/fun/blobs/
 - http://127.0.0.1:8080/fun/warblade/
 - http://127.0.0.1:8080/fun/tictactoe/
+- http://127.0.0.1:8080/fun/tanja/
 
 Blobs: select a blob and jump to a highlighted landing cell. Check the help and level controls.
 
@@ -100,7 +107,7 @@ TicTacToe: take turns clicking or tapping empty squares. Check a win, a draw, an
 
 Check the browser console and network panel for JavaScript errors or missing files. Stop the preview with Ctrl+C.
 
-The six public pages should each load `/assets/analytics.js` once. Local previews must not request `cloud.umami.is`. Both exporters preserve the loader after updates; see [analytics verification](ANALYTICS.md#verify-collection) for the production checks and owner opt-out.
+The tracked public pages should each load `/assets/analytics.js` once. Local previews must not request `cloud.umami.is`. The exporters preserve the loader after updates. See [analytics verification](ANALYTICS.md#verify-collection) for production checks and owner opt-out.
 
 ## Publish
 
