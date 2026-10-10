@@ -39,6 +39,12 @@ h1 { font-size: 44px; line-height: 1.2; font-weight: 400; letter-spacing: -1.5px
 .game-row .controls-note { font-size: 11px; margin-top: 9px; }
 .game-preview { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
 .game-thumbnail { display: block; width: 160px; height: 120px; object-fit: cover; border: 1px solid var(--page-line); border-radius: 4px; }
+.screenshot-link { display: block; cursor: zoom-in; border-radius: 4px; }
+#baguetteBox-overlay .full-image figcaption { font: 400 13px/1.7 'DM Sans', sans-serif; padding: 10px; }
+#baguetteBox-overlay .baguetteBox-button:focus-visible { outline: 2px solid #ffffff; outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  #baguetteBox-overlay, #baguetteBox-slider { transition: none; }
+}
 .play-link { font-size: 12px; color: var(--page-accent); white-space: nowrap; }
 @media (max-width: 580px) {
   .site-page { padding: 24px; min-height: 620px; }
@@ -50,5 +56,5 @@ h1 { font-size: 44px; line-height: 1.2; font-weight: 400; letter-spacing: -1.5px
   .game-thumbnail { width: 112px; height: 84px; }
 }
 @media (pointer: coarse) {
-  .page-top a, .project-link, .fun-link, .game-shortcuts a { min-height: 44px; display: inline-flex; align-items: center; }
+  .page-top a, .project-link, .fun-link, .game-shortcuts a, .game-title, .play-link { min-height: 44px; display: inline-flex; align-items: center; }
 }

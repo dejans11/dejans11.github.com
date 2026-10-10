@@ -39,9 +39,10 @@ See [Publishing and updating the games](docs/PUBLISHING.md) for the full procedu
 
 - `index.html`, `projects/index.html`, `fun/index.html`: profile pages.
 - `assets/site.css`: shared profile styling.
+- `assets/game-gallery.js`, `assets/vendor/baguettebox/`: screenshot modal setup and the bundled lightbox library, including its license.
 - `fun/blobs/`, `fun/warblade/`: exported playable games.
 - `scripts/import-games.mjs`: local export tool.
 - `tests/import-games.test.mjs`: export checks.
 - `design/`: the approved design preview and its editable source.
 
-The profile pages use plain HTML and CSS. `.nojekyll` lets GitHub Pages publish these files directly. The older Octopress files remain in Git history and the repository; the homepage no longer links to them.
+The profile pages use plain HTML, CSS, and JavaScript. `.nojekyll` lets GitHub Pages publish these files directly. The older Octopress files remain in Git history and the repository; the homepage no longer links to them.

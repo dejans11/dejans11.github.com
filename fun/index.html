@@ -6,7 +6,10 @@
   <meta name="description" content="Play Blobs, a peg solitaire puzzle, and Warblade, an arcade space shooter.">
   <title>Fun · Dejan Križan</title>
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/vendor/baguettebox/baguetteBox.min.css">
   <link rel="stylesheet" href="../assets/site.css">
+  <script src="../assets/vendor/baguettebox/baguetteBox.min.js" defer></script>
+  <script src="../assets/game-gallery.js" defer></script>
 </head>
 <body>
   <div class="site-page">
@@ -16,20 +19,24 @@
       <h1>Fun</h1>
       <p class="bio">A few games for your browser.</p>
       <div class="game-list">
-        <a class="game-row" href="blobs/" target="_blank" rel="noopener noreferrer" aria-label="Play Blobs (opens in a new tab)">
-          <div><h2>Blobs</h2><p>Peg solitaire with blobs. Jump over them until only one remains.</p><p class="controls-note">Click a blob, then a highlighted landing cell.</p></div>
+        <article class="game-row">
+          <div><h2><a class="game-title" href="blobs/" target="_blank" rel="noopener noreferrer" aria-label="Play Blobs (opens in a new tab)">Blobs</a></h2><p>Peg solitaire with blobs. Jump over them until only one remains.</p><p class="controls-note">Click a blob, then a highlighted landing cell.</p></div>
           <div class="game-preview">
-            <img class="game-thumbnail" src="../assets/games/blobs.png" width="160" height="120" loading="lazy" alt="Blobs puzzle in progress, with blobs and empty landing cells.">
-            <span class="play-link">Play <span aria-hidden="true">↗</span></span>
+            <a class="screenshot-link" href="../assets/games/blobs.png" data-caption="Blobs · Puzzle in progress" aria-label="Enlarge Blobs gameplay screenshot" aria-haspopup="dialog">
+              <img class="game-thumbnail" src="../assets/games/blobs.png" width="160" height="120" loading="lazy" alt="Blobs puzzle in progress, with blobs and empty landing cells.">
+            </a>
+            <a class="play-link" href="blobs/" target="_blank" rel="noopener noreferrer" aria-label="Play Blobs (opens in a new tab)">Play <span aria-hidden="true">↗</span></a>
           </div>
-        </a>
-        <a class="game-row" href="warblade/" target="_blank" rel="noopener noreferrer" aria-label="Play Warblade (opens in a new tab)">
-          <div><h2>Warblade</h2><p>An arcade space shooter. Clear waves of enemies and collect upgrades.</p><p class="controls-note">Keyboard · Enter to start, arrows or WASD to move, Space to fire.</p></div>
+        </article>
+        <article class="game-row">
+          <div><h2><a class="game-title" href="warblade/" target="_blank" rel="noopener noreferrer" aria-label="Play Warblade (opens in a new tab)">Warblade</a></h2><p>An arcade space shooter. Clear waves of enemies and collect upgrades.</p><p class="controls-note">Keyboard · Enter to start, arrows or WASD to move, Space to fire.</p></div>
           <div class="game-preview">
-            <img class="game-thumbnail" src="../assets/games/warblade.jpg" width="160" height="120" loading="lazy" alt="Warblade in progress, with the player’s ship firing at enemy ships.">
-            <span class="play-link">Play <span aria-hidden="true">↗</span></span>
+            <a class="screenshot-link" href="../assets/games/warblade.jpg" data-caption="Warblade · Space combat in progress" aria-label="Enlarge Warblade gameplay screenshot" aria-haspopup="dialog">
+              <img class="game-thumbnail" src="../assets/games/warblade.jpg" width="160" height="120" loading="lazy" alt="Warblade in progress, with the player’s ship firing at enemy ships.">
+            </a>
+            <a class="play-link" href="warblade/" target="_blank" rel="noopener noreferrer" aria-label="Play Warblade (opens in a new tab)">Play <span aria-hidden="true">↗</span></a>
           </div>
-        </a>
+        </article>
       </div>
     </main>
     <footer class="page-footer">Dejan Križan · 2026 · Personal website</footer>
