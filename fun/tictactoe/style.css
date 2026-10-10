@@ -1,0 +1,204 @@
+:root {
+  --bg-color: #0d0d12;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --text-main: #ffffff;
+  --text-dim: #a0a0ab;
+  --color-x: #00f2ff;
+  --color-o: #ff007a;
+  --color-win: #39ff14;
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --shadow-glow: 0 0 20px rgba(0, 242, 255, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(255, 0, 122, 0.05) 0%, transparent 40%);
+}
+
+.container {
+  width: 100%;
+  max-width: 450px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+header {
+  text-align: center;
+}
+
+h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  background: linear-gradient(90deg, var(--color-x), var(--color-o));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.status {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+}
+
+.status span {
+  font-weight: 700;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.status span.x { color: var(--color-x); }
+.status span.o { color: var(--color-o); }
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  padding: 12px;
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.cell {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3.5rem;
+  font-family: var(--font-heading);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.cell:hover:not(.x):not(.o) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--glass-border);
+  transform: scale(1.02);
+}
+
+.cell.x {
+  color: var(--color-x);
+  text-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+}
+
+.cell.o {
+  color: var(--color-o);
+  text-shadow: 0 0 15px rgba(255, 0, 122, 0.5);
+}
+
+.cell.x::after {
+  content: 'X';
+  animation: popIn 0.3s ease-out;
+}
+
+.cell.o::after {
+  content: 'O';
+  animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.cell.winner {
+  background: rgba(57, 255, 20, 0.1);
+  border-color: var(--color-win);
+  color: var(--color-win);
+  text-shadow: 0 0 20px var(--color-win);
+}
+
+.controls {
+  width: 100%;
+}
+
+.btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  border-radius: 12px;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--text-dim);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.scores {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.score-card {
+  flex: 1;
+  background: var(--glass-bg);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.score-card .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  letter-spacing: 0.05rem;
+}
+
+.score-card .value {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+#score-x { color: var(--color-x); }
+#score-o { color: var(--color-o); }

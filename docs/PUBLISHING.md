@@ -1,6 +1,6 @@
 # Publishing and updating the games
 
-This public repository hosts the profile and the playable browser versions of Blobs and Warblade on GitHub Pages. The original game repositories stay private. Updating a game means exporting its runtime files here, testing them, then pushing this repository.
+This public repository hosts the profile and the playable browser versions of Blobs, Warblade, and TicTacToe on GitHub Pages. The Blobs and Warblade source repositories stay private; TicTacToe is exported from its local game folder. Updating a game means exporting its runtime files here, testing them, then pushing this repository after explicit approval.
 
 ## GitHub Pages setup
 
@@ -64,38 +64,53 @@ Do not edit the exported game files directly: the next export replaces them. Mak
 
 The deployed JavaScript and assets remain public and downloadable because the browser needs them to play. Keeping the repositories private preserves their history and development files; it does not hide shipped browser code.
 
+## Export TicTacToe
+
+TicTacToe already uses plain HTML, CSS, and JavaScript. It needs neither a Node.js server nor an npm build. From this website repository, run:
+
+```powershell
+& "E:\dev\AI-projects\games\tictactoe\export-pages.ps1" -SitePath (Get-Location).Path
+```
+
+This copies `index.html`, `main.js`, `style.css`, and `favicon.svg` to `fun/tictactoe/`. It does not modify other games, commit, or push. Rerun it after changes in the source game folder, then preview and commit the website changes. The existing Git-based export tool and version manifest continue to cover Blobs and Warblade.
+
+The source game folder also contains a README with these update instructions. If you add a game asset, add it to the PowerShell script's `$files` list. Keep runtime paths relative to the game directory.
+
 ## Preview and check
 
 With Python 3 installed:
 
 ```powershell
-npm run preview
+python -m http.server 8080 --bind 127.0.0.1
 ```
 
-Open http://127.0.0.1:8080/, follow **Fun**, and test both games. Also open each game directly:
+Open http://127.0.0.1:8080/, follow **Fun**, and test the games. Also open each game directly:
 
 - http://127.0.0.1:8080/fun/blobs/
 - http://127.0.0.1:8080/fun/warblade/
+- http://127.0.0.1:8080/fun/tictactoe/
 
 Blobs: select a blob and jump to a highlighted landing cell. Check the help and level controls.
 
 Warblade: press Enter to start, use arrows or WASD to move, and Space to fire. Press P to pause. The current release uses keyboard controls.
 
+TicTacToe: take turns clicking or tapping empty squares. Check a win, a draw, and Reset Game.
+
 Check the browser console and network panel for JavaScript errors or missing files. Stop the preview with Ctrl+C.
 
 ## Publish
 
-Run this sequence on `master`. If you made the update on a feature branch, commit there and integrate it into `master` before pushing `master`. Review and commit the exported files, version manifest, and any catalogue changes:
+Run this sequence on `master`. If you made the update on a feature branch, commit there and integrate it into `master` before pushing `master`. Review and commit the exported files, version manifest, screenshots, and any catalogue or homepage changes. Push only after explicitly approving the repository, branch, and commits:
 
 ```powershell
 git status --short
 git diff --stat
-git add fun/
+git add fun/ assets/games/ index.html
 git commit -m "Update browser game releases"
 git push origin master
 ```
 
-Confirm the Pages deployment finishes, then test https://dejans11.github.io/fun/ and both Play links. If a new version looks unchanged, reload without cache.
+Confirm the Pages deployment finishes, then test https://dejans11.github.io/fun/ and the Play links. If a new version looks unchanged, reload without cache.
 
 ## Troubleshooting
 

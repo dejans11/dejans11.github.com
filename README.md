@@ -9,6 +9,7 @@ A static GitHub Pages site with a short personal introduction, projects, and bro
 | Fun | https://dejans11.github.io/fun/ |
 | Blobs | https://dejans11.github.io/fun/blobs/ |
 | Warblade | https://dejans11.github.io/fun/warblade/ |
+| TicTacToe | https://dejans11.github.io/fun/tictactoe/ |
 
 Blobs and Warblade keep their source repositories private. This public repository contains only their browser runtime files. The export script selects the files to publish and records their source commits in `fun/game-versions.json`.
 
@@ -17,10 +18,10 @@ Blobs and Warblade keep their source repositories private. This public repositor
 With Python 3 installed, run from this repository:
 
 ```sh
-npm run preview
+python -m http.server 8080 --bind 127.0.0.1
 ```
 
-Open http://127.0.0.1:8080/. Stop the server with Ctrl+C. You can also run `python -m http.server 8080 --bind 127.0.0.1` directly without Node.js.
+Open http://127.0.0.1:8080/. Stop the server with Ctrl+C. No Node.js is needed; `npm run preview` is an optional shortcut if you have it installed.
 
 ## Update the games
 
@@ -33,6 +34,14 @@ npm test
 
 No `npm install` or framework build is required. You can supply just `--blobs` or just `--warblade` to update one game. The source repositories are read, never modified.
 
+TicTacToe has a simple PowerShell export that also works without Node.js:
+
+```powershell
+& "E:\dev\AI-projects\games\tictactoe\export-pages.ps1" -SitePath (Get-Location).Path
+```
+
+Rerun the export after game changes, preview, then review and commit the website update. Publishing requires an explicitly approved push.
+
 See [Publishing and updating the games](docs/PUBLISHING.md) for the full procedure, GitHub Pages settings, and troubleshooting.
 
 ## Site files
@@ -40,7 +49,7 @@ See [Publishing and updating the games](docs/PUBLISHING.md) for the full procedu
 - `index.html`, `projects/index.html`, `fun/index.html`: profile pages.
 - `assets/site.css`: shared profile styling.
 - `assets/game-gallery.js`, `assets/vendor/baguettebox/`: screenshot modal setup and the bundled lightbox library, including its license.
-- `fun/blobs/`, `fun/warblade/`: exported playable games.
+- `fun/blobs/`, `fun/warblade/`, `fun/tictactoe/`: exported playable games.
 - `scripts/import-games.mjs`: local export tool.
 - `tests/import-games.test.mjs`: export checks.
 - `design/`: the approved design preview and its editable source.
