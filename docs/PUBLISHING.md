@@ -32,7 +32,7 @@ git -C "E:\dev\AI-projects\games\blobs" pull --ff-only
 git -C "E:\dev\AI-projects\games\warblade" pull --ff-only
 ```
 
-Use clean, committed game releases. The export tool refuses uncommitted or untracked changes in a source checkout, so unfinished experiments cannot slip into a published release. Commit and push intended game changes in their private repository before exporting them.
+Use clean, committed game releases. The export tool refuses uncommitted or untracked changes in a source checkout, so unfinished experiments cannot slip into a published release. Commit intended game changes in their private repository before exporting them. Any push to a private game repository also requires explicit approval of that specific push.
 
 ## Export a release
 
@@ -58,7 +58,7 @@ Both games currently work directly as static browser files; no Vite, Unity, or o
 | Blobs | `index.html`, `style.css`, `game.js`, `solver.js` |
 | Warblade | `index.html`, `style.css`, `game.js`, supported image, audio, and font files under `assets/` |
 
-The tool validates all requested sources before replacing an export. Every selected runtime file must belong to the source commit; ignored runtime files are rejected. Exported bytes come directly from that commit. It excludes Git metadata, README files, tests, tools, development plans, environment files, source artwork, and source maps. It records the imported commits and timestamps in `fun/game-versions.json`, without local source paths.
+The tool validates all requested sources before replacing an export. Every selected runtime file must belong to the source commit; ignored runtime files are rejected. Runtime bytes come directly from that commit, with one website-owned addition to `index.html`: the shared analytics loader. The private source is not modified. The tool excludes Git metadata, README files, tests, tools, development plans, environment files, source artwork, and source maps. It records the imported commits and timestamps in `fun/game-versions.json`, without local source paths.
 
 Do not edit the exported game files directly: the next export replaces them. Make game changes in the private source repository. If a game gains new runtime files, update its allowlist in `scripts/import-games.mjs`, then test its export.
 
@@ -69,12 +69,12 @@ The deployed JavaScript and assets remain public and downloadable because the br
 TicTacToe already uses plain HTML, CSS, and JavaScript. It needs neither a Node.js server nor an npm build. From this website repository, run:
 
 ```powershell
-& "E:\dev\AI-projects\games\tictactoe\export-pages.ps1" -SitePath (Get-Location).Path
+./scripts/import-tictactoe.ps1 -SourcePath "E:\dev\AI-projects\games\tictactoe"
 ```
 
-This copies `index.html`, `main.js`, `style.css`, and `favicon.svg` to `fun/tictactoe/`. It does not modify other games, commit, or push. Rerun it after changes in the source game folder, then preview and commit the website changes. The existing Git-based export tool and version manifest continue to cover Blobs and Warblade.
+This copies `index.html`, `main.js`, `style.css`, and `favicon.svg` to `fun/tictactoe/`, adding the shared analytics loader to the website copy of the HTML. It does not modify the source folder or other games, commit, or push. Rerun it after changes in the source game folder, then preview and commit the website changes. The existing Git-based export tool and version manifest continue to cover Blobs and Warblade.
 
-The source game folder also contains a README with these update instructions. If you add a game asset, add it to the PowerShell script's `$files` list. Keep runtime paths relative to the game directory.
+Use this website-owned export command rather than the source folder's older `export-pages.ps1`, which does not preserve website analytics. If you add a game asset, add it to `$files` in `scripts/import-tictactoe.ps1`. Keep runtime paths relative to the game directory.
 
 The [TicTacToe publishing guide](TICTACTOE.md) gives the complete export, preview, commit, and approved-push sequence, including how to refresh its gameplay screenshot.
 
@@ -100,6 +100,8 @@ TicTacToe: take turns clicking or tapping empty squares. Check a win, a draw, an
 
 Check the browser console and network panel for JavaScript errors or missing files. Stop the preview with Ctrl+C.
 
+The six public pages should each load `/assets/analytics.js` once. Local previews must not request `cloud.umami.is`. Both exporters preserve the loader after updates; see [analytics verification](ANALYTICS.md#verify-collection) for the production checks and owner opt-out.
+
 ## Publish
 
 Run this sequence on `master`. If you made the update on a feature branch, commit there and integrate it into `master` before pushing `master`. Review and commit the exported files, version manifest, screenshots, and any catalogue or homepage changes. Push only after explicitly approving the repository, branch, and commits:
@@ -113,6 +115,8 @@ git push origin master
 ```
 
 Confirm the Pages deployment finishes, then test https://dejans11.github.io/fun/ and the Play links. If a new version looks unchanged, reload without cache.
+
+Confirm a controlled visit appears under the correct page path in Umami, then re-enable the owner opt-out if you normally exclude your own visits.
 
 ## Troubleshooting
 

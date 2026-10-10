@@ -22,7 +22,7 @@ function fixture(t) {
     const source = join(root, slug);
     sources[slug] = source;
     mkdirSync(source);
-    writeFileSync(join(source, 'index.html'), '<script src="game.js"></script>');
+    writeFileSync(join(source, 'index.html'), '<!doctype html><html><head><title>Game</title></head><body><script src="game.js"></script></body></html>');
     writeFileSync(join(source, 'game.js'), `console.log('${slug}');`);
     writeFileSync(join(source, 'style.css'), 'body { margin: 0; }');
     writeFileSync(join(source, 'README.md'), 'Private development notes');
@@ -65,6 +65,35 @@ test('exports the playable files while excluding private development files', t =
   const expectedCommit = execFileSync('git', ['-C', sources.blobs, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
   assert.equal(versions.blobs.commit, expectedCommit);
   assert.equal(JSON.stringify(versions).includes(sources.blobs), false);
+});
+
+test('game exports add site analytics without changing the source or runtime scripts', t => {
+  const { site, sources, run } = fixture(t);
+  const original = readFileSync(join(sources.blobs, 'index.html'), 'utf8');
+  for (let update = 0; update < 2; update++) {
+    const result = run('--blobs', sources.blobs, '--warblade', sources.warblade);
+    assert.equal(result.status, 0, result.stderr);
+    for (const slug of ['blobs', 'warblade']) {
+      const html = readFileSync(join(site, 'fun', slug, 'index.html'), 'utf8');
+      assert.equal((html.match(/src="\/assets\/analytics\.js"/g) || []).length, 1);
+      assert.match(html, /<head>[\s\S]*<script[^>]*src="\/assets\/analytics\.js"[^>]*><\/script>[\s\S]*<\/head>/);
+      assert.equal(readFileSync(join(site, 'fun', slug, 'game.js'), 'utf8'), `console.log('${slug}');`);
+    }
+  }
+  assert.equal(readFileSync(join(sources.blobs, 'index.html'), 'utf8'), original);
+});
+
+test('an invalid HTML head leaves the previous published game intact', t => {
+  const { site, sources, run } = fixture(t);
+  mkdirSync(join(site, 'fun', 'blobs'), { recursive: true });
+  writeFileSync(join(site, 'fun', 'blobs', 'index.html'), 'Previous release');
+  writeFileSync(join(sources.blobs, 'index.html'), '<html><body>Missing head</body></html>');
+  execFileSync('git', ['-C', sources.blobs, 'add', 'index.html']);
+  execFileSync('git', ['-C', sources.blobs, 'commit', '-qm', 'Invalid HTML']);
+  const result = run('--blobs', sources.blobs);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /head/i);
+  assert.equal(readFileSync(join(site, 'fun', 'blobs', 'index.html'), 'utf8'), 'Previous release');
 });
 
 test('validates both sources before replacing an existing working export', t => {

@@ -32,6 +32,9 @@ h1 { font-size: 44px; line-height: 1.2; font-weight: 400; letter-spacing: -1.5px
 .game-shortcuts a { display: inline-flex; align-items: center; gap: 8px; color: var(--page-accent); font-size: 13px; padding: 2px 0; }
 .game-shortcuts .arrow { font-size: 12px; }
 .page-footer { border-top: 1px solid var(--page-line); padding-top: 19px; font-size: 11px; color: var(--page-muted); }
+.footer-privacy { display: inline-block; margin-left: 12px; }
+.footer-privacy a, .privacy-copy a { text-decoration: underline; text-underline-offset: 3px; }
+.privacy-copy p { margin-top: 20px; }
 .game-list { margin-top: 37px; }
 .game-row { padding: 24px 0; border-top: 1px solid var(--page-line); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; }
 .game-row h2 { font-size: 20px; line-height: 1.5; font-weight: 400; letter-spacing: -.3px; }

@@ -1,6 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, extname, isAbsolute, join, relative, resolve, sep } from 'node:path';
+import { withSiteAnalytics } from './site-analytics.mjs';
 
 const games = {
   blobs: { files: ['index.html', 'style.css', 'game.js', 'solver.js'], assets: false },
@@ -106,7 +107,7 @@ function main(args) {
         inside(staging, destination);
         mkdirSync(dirname(destination), { recursive: true });
         const bytes = execFileSync('git', ['-C', source, 'cat-file', 'blob', objects.get(file)], { maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
-        writeFileSync(destination, bytes);
+        writeFileSync(destination, file === 'index.html' ? withSiteAnalytics(bytes.toString('utf8')) : bytes);
       }
     }
     mkdirSync(fun, { recursive: true });
