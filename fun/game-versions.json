@@ -7,6 +7,17 @@
     "commit": "e3408dded4c55ca5232690e9ef0362dbc7b1e8e0",
     "importedAt": "2026-10-09T23:50:43.452Z"
   },
+  "lale-manager": {
+    "sourceHtmlSha256": "9c786d6ca86a3737131c0b390d6cddff8ba37fea4179d6e6119f05eff239a2d7",
+    "publishedHtmlSha256": "086c423f3b80cb039bd85d683d38140f8f27b640c09f3075c2937ec2a6c1a253",
+    "zipSha256": "a7d61e889cb396ce20e54d916ddd26fb2f3b67942a15d3ed134d930aa25a03de",
+    "files": [
+      "index.html",
+      "retro-football-manager.zip"
+    ],
+    "importedAt": "2026-10-10T07:12:13.046Z",
+    "screenshotSha256": "3521b77623114a19e6edd7cccee73e3bb9498bb59d2669d25f28646ea6fd5d42"
+  },
   "tanja": {
     "commit": "2a6d9c4369bf4b27dc532af988439b3da388ebc4",
     "importedAt": "2026-10-10T06:30:15.077Z",
