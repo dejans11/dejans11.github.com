@@ -23,7 +23,7 @@ Each tracked HTML page contains one deferred reference to `/assets/analytics.js`
 - `/fun/warblade/`
 - `/fun/tictactoe/`
 - `/fun/lale-manager/` (Footsi; prepared locally, pending approved publication)
-- `/fun/tanja/` (Girl in Fire; prepared locally, pending approved publication)
+- `/fun/girl-in-fire/` (Girl in Fire; URL correction prepared locally, pending approved deployment; previous `/fun/tanja/` release published 10 October 2026)
 
 The privacy page, design previews, and legacy Octopress pages are not instrumented. The absolute loader path assumes this personal site is published at the domain root.
 
@@ -49,7 +49,9 @@ For Footsi (source project Retro Football Manager), use `npm run import:lale-man
 
 See [publishing games](PUBLISHING.md) and [TicTacToe updates](TICTACTOE.md).
 
-For Girl in Fire (Tanja), use `npm run import:games -- --tanja <clean-committed-checkout>`. Hosted HTML gains the shared loader/privacy link and public name; the source/offline package retains the concept and no analytics. Sound starts off on every load. Best scores stay local; no game actions, audio settings or scores are submitted. Local/controlled-host checks pass; live dashboard reception is pending. See [Girl in Fire publishing](TANJA.md).
+For Girl in Fire (Tanja), use `npm run import:games -- --tanja <clean-committed-checkout>`. Hosted HTML gains the shared loader/privacy link and public name; the source/offline package retains the concept and no analytics. Sound starts off on every load. Best scores stay local; no game actions, audio settings or scores are submitted. Local/controlled-host checks pass. After publication on 10 October 2026, the actual game pageview received HTTP200 from `https://gateway.umami.is/api/send` with the correct website ID and query/fragment excluded. Collector acceptance is verified; authenticated dashboard display was not inspected. See [Girl in Fire publishing](TANJA.md).
+
+The URL correction moves the instrumented runtime to `/fun/girl-in-fire/`. The old `/fun/tanja/` redirect has no analytics loader, so it does not add a duplicate pageview. Confirm the new path at the real collector after the separately approved deployment; earlier live evidence covers the original path.
 
 ## Exclude your own visits
 

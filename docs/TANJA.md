@@ -1,12 +1,22 @@
 # Publishing Girl in Fire (Tanja)
 
-Girl in Fire is the site's display name for **Tanja — Paratroopers Over Mostar**. The prepared URL is `https://dejans11.github.io/fun/tanja/`; the folder, exporter option and version-record key remain `tanja`. Sound starts **off on every page load**, including reload. Players can enable it through the Sound button.
+Girl in Fire is the site's display name for **Tanja — Paratroopers Over Mostar**. Its public address is [Girl in Fire](https://dejans11.github.io/fun/girl-in-fire/); the hosted directory is `girl-in-fire`, while the source name, `--tanja` exporter option and `tanja` version-record key remain unchanged. Sound starts **off on every page load**, including reload. Players can enable it through the Sound button.
 
 ## Current status — 10 October 2026
 
-Prepared and verified locally; **not published yet**. Local Phase7 commits were approved on 10 October 2026. The 29-file runtime export records source commit `2a6d9c4369bf` and release `0.1-review` in [game versions](../fun/game-versions.json). Homepage/Fun links and gameplay screenshot are ready. Specific website push approval, Pages completion and authenticated Umami dashboard reception remain pending.
+**Published on 10 October 2026.** The user approved the specific push of website commits `41e5656`, `92a3507` and `963ed70` to `dejans11/dejans11.github.com`, `origin/master`, while requesting no new branches. The website's existing default/publishing branch is `master`; Tanja uses `main`. No branch was created or renamed, and no source push was needed. The [Pages deployment](https://github.com/dejans11/dejans11.github.com/actions/runs/38033412047) completed successfully at 07:09:21 UTC for `963ed70fcdc2bdd1fd2ae1c623dd3d404dae1788`.
+
+The 29-file runtime export records source commit `2a6d9c4369bf` and release `0.1-review` in [game versions](../fun/game-versions.json). At 07:11 UTC, all 35 checked live files matched that website commit by SHA-256: game runtime, homepage/Fun, privacy, analytics loader, screenshot and version manifest. Both catalogue links were present; the excluded original-concept path returned 404. Concurrent football-manager work was excluded from that initial push. Subsequent website documentation is included in the locally committed URL correction below; source documentation remains uncommitted for review.
 
 The source checkout is `C:\dev\games\tanja` (`main`); the website is `E:\dev\dejans11.github.com` (`master`, origin `dejans11/dejans11.github.com`). Existing site docs describe branch-root Pages with `.nojekyll`. Confirm **Settings → Pages → master / root** before an approved push; authenticated remote settings were not inspected here. See [GitHub's source configuration](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+
+## Public URL correction
+
+The user requested that the public URL also match Girl in Fire and be deployed. The verified website change is committed locally as `3f46ee9`; its specific push and Pages deployment remain pending. Homepage/Fun links and future `--tanja` exports now target `/fun/girl-in-fire/`; the version record adds `path: "fun/girl-in-fire/"`. The original 29 runtime files are moved unchanged, and the gallery capture is renamed to `assets/games/girl-in-fire.png`. `/fun/tanja/` contains only an analytics-free redirect with a canonical link and a visible fallback link; its previous runtime files are removed.
+
+Saved best scores survive the route change because the origin and `tanja.bestScore.v1` key are unchanged. The sound setting still resets to off. Initial publication and real Umami evidence below refer to the earlier `/fun/tanja/` release; verify the new actual URL and pageview after the next approved deployment. Website regressions pass72/72, including canonical-directory export/reimport and failure preservation. The pending URL correction is not claimed deployed.
+
+Private Chrome154 completes a native-input ten-visitor/two-boss/1200 round at the new loopback URL, with pause/audio/replay/title/no11/best reload and initial/reload Sound off. Revisiting the old bookmark redirects correctly and retains best1200 with Sound off. Final run has zero page/console errors or failed requests and sends no local analytics. All29 runtime files and the gallery image match the initial published bytes.
 
 ## Export and preview
 
@@ -18,7 +28,7 @@ npm test
 python -m http.server 8080 --bind 127.0.0.1
 ```
 
-`npm run import:games -- --tanja <checkout>` is equivalent. No npm installation, bundler, player installation or new account is needed. The source is read without modification; the exporter makes no commit/push/deployment. Open `http://127.0.0.1:8080/fun/tanja/` and follow the homepage/Fun Play links. Stop the preview with Ctrl+C.
+`npm run import:games -- --tanja <checkout>` is equivalent. No npm installation, bundler, player installation or new account is needed. The source is read without modification; the exporter makes no commit/push/deployment. Open `http://127.0.0.1:8080/fun/girl-in-fire/` and follow the homepage/Fun Play links. Stop the preview with Ctrl+C.
 
 The current export originally used the clean source root. After review captures made that root dirty, the name update was re-exported from an ignored clean local clone of the **same committed source**, without bypassing the guard or committing pending work. Later updates should use a reviewed clean checkout.
 
@@ -36,13 +46,15 @@ The static dependency guard covers quoted HTML resource/link attributes and srcs
 
 Directory-prefix casing must be consistent. The hosted transform rejects missing/ambiguous title, heading, version footer, privacy link or shared analytics loader; source markup changes require a corresponding website transform update.
 
-Do not edit `fun/tanja/` directly; re-exporting replaces it. Website naming belongs in `scripts/tanja-export.mjs`; the source/offline title stays intact. For art updates, capture the actual native 640×360 Canvas as `assets/games/tanja.png` and refresh Fun description/alt text if needed. The exporter does not capture screenshots.
+Do not edit `fun/girl-in-fire/` directly; re-exporting replaces it. Website naming belongs in `scripts/tanja-export.mjs`; the output directory is configured in `scripts/import-games.mjs`. The source/offline title stays intact. For art updates, capture the actual native 640×360 Canvas as `assets/games/girl-in-fire.png` and refresh Fun description/alt text if needed. The exporter does not capture screenshots. Preserve the old-address redirect when updating the game.
 
 ## Analytics and browser data
 
 Hosted HTML has exactly one `/assets/analytics.js` loader and `/privacy.html` link. The shared loader admits only `dejans11.github.io`, respects Do Not Track and excludes URL queries/fragments. Best score stays local under `tanja.bestScore.v1`, with an in-memory fallback. No game events, scores or sound settings are submitted; sound preferences do not persist. The source/offline game has no analytics.
 
 See [analytics and live verification](ANALYTICS.md), [visitor notice](../privacy.html) and [Umami configuration](https://docs.umami.is/docs/tracker-configuration). Controlled production-host tests used locally fulfilled site responses and a harmless tracker stub/abort: they verify configuration, DNT gating and blocked-tracker gameplay, **not real collection or dashboard reception**.
+
+After publication, a real game pageview was accepted with HTTP200 by `https://gateway.umami.is/api/send`, using the existing website ID. The query/fragment test visit submitted only `https://dejans11.github.io/fun/tanja/`. No game actions or scores were submitted. Collector acceptance is verified; authenticated dashboard display was not inspected. The private test browser was closed without changing the owner's browser storage.
 
 ## Verified local acceptance
 
@@ -53,13 +65,17 @@ See [analytics and live verification](ANALYTICS.md), [visitor notice](../privacy
 
 Tanja's `docs/art/PHASE7_WEB_REVIEW.md` holds native captures/limits. Headless desktop responsive checks do not establish physical Android/iOS behavior, Windows minimize/restore or subjective speaker listening. Earlier offline/visibility checks remain recorded in the source project.
 
+## Verified published acceptance
+
+Actual production Chrome154.0.8037.98 completed ten random-stamina encounters, bosses5/10 and1200 points using native Canvas mouse input. Gesture-started audio, frame/audio pause, terminal silence/no11, replay/title, saved best1200 and initial/reload Sound off pass. The final run has zero page/console errors, failed requests or original-concept requests. Live homepage/Fun title links resolve to the game;35 downloaded files match approved commit963ed70. The first visit received a transient503 for resources.js; a fresh load cleared it without a deployed-code change. The source web review contains the native live capture and precise evidence limits.
+
 ## Review, publication and follow-up
 
 1. Review both repos. Commit only after approval, selecting Tanja changes carefully because other website work may be pending.
 2. For future source updates, commit approved source changes first, then export/verify the clean checkout. A source push is not required for the website export.
 3. Before any push, identify the **repository, branch and exact commits** in ordinary chat and obtain specific approval. Commit approval is not push approval; avoid implicit publishing commands.
 4. After the approved site `origin/master` push, check **Actions → pages build and deployment**, then test live homepage/Fun/game/resources/privacy, full round, replay and sound-off reload.
-5. Follow the analytics guide for one controlled production visit and confirm `/fun/tanja/` in Umami. Restore owner opt-out if used. Record deployed commit/date/URL and real results in this guide and Tanja's deployment/review docs. Until then retain prepared-only status.
+5. Follow the analytics guide for one controlled production visit and confirm `/fun/girl-in-fire/` in Umami. Restore owner opt-out if used. Record deployed commit/date/URL and real results in this guide and Tanja's deployment/review docs. Until then retain prepared-only status for each new release.
 
 ## Rollback
 

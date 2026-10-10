@@ -82,9 +82,9 @@ Footsi is prepared locally; its initial website commits are approved, and remote
 
 ## Export Girl in Fire (Tanja)
 
-The prepared static game uses the public name **Girl in Fire** at `/fun/tanja/`. From this website root, run `npm run import:games -- --tanja "C:\dev\games\tanja"` against a clean committed source checkout. Source allowlist/asset hashes select 29 runtime files; hosted HTML alone gains the name, privacy link and shared Umami loader. The original concept/link stay only in the separate offline package. Sound starts off on every load.
+The static game uses the public name **Girl in Fire** at `/fun/girl-in-fire/`. The URL correction is prepared locally; `/fun/tanja/` becomes a redirect after its approved deployment. From this website root, run `npm run import:games -- --tanja "C:\dev\games\tanja"` against a clean committed source checkout. Source allowlist/asset hashes select 29 runtime files; hosted HTML alone gains the name, privacy link and shared Umami loader. The original concept/link stay only in the separate offline package. Sound starts off on every load.
 
-Preview/test/review before committing. This phase prepares files locally. See [Girl in Fire update, acceptance and rollback](TANJA.md). The exporter preserves other games/version entries and never commits or pushes.
+Preview/test/review before committing. Initial publication succeeded on 10 October 2026 at website commit `963ed70`, following approval of its exact push. Future exports are local preparation until separately approved publication. See [Girl in Fire update, acceptance and rollback](TANJA.md). The exporter preserves other games/version entries and never commits or pushes.
 
 ## Export TicTacToe
 
@@ -114,7 +114,7 @@ Open http://127.0.0.1:8080/, follow **Fun**, and test the games. Also open each 
 - http://127.0.0.1:8080/fun/warblade/
 - http://127.0.0.1:8080/fun/tictactoe/
 - http://127.0.0.1:8080/fun/lale-manager/
-- http://127.0.0.1:8080/fun/tanja/
+- http://127.0.0.1:8080/fun/girl-in-fire/
 
 Blobs: select a blob and jump to a highlighted landing cell. Check the help and level controls.
 

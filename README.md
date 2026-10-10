@@ -11,7 +11,7 @@ A static GitHub Pages site with a short personal introduction, projects, and bro
 | Warblade | https://dejans11.github.io/fun/warblade/ |
 | TicTacToe | https://dejans11.github.io/fun/tictactoe/ |
 | Footsi (prepared locally) | https://dejans11.github.io/fun/lale-manager/ |
-| Girl in Fire (prepared locally) | https://dejans11.github.io/fun/tanja/ |
+| Girl in Fire | https://dejans11.github.io/fun/girl-in-fire/ |
 
 Blobs and Warblade keep their source repositories private. This public repository contains only their browser runtime files. The export script selects the files to publish and records their source commits in `fun/game-versions.json`.
 
@@ -60,7 +60,7 @@ Girl in Fire (source project Tanja) uses a clean committed checkout:
 npm run import:games -- --tanja "C:\dev\games\tanja"
 ```
 
-Its public name/privacy/Umami are applied only to hosted HTML; original concept/image links stay in the separate offline package. Sound starts off on every load. See [Girl in Fire publishing and local verification](docs/TANJA.md). Local commits are approved; publication awaits specific push approval.
+Its public name/privacy/Umami are applied only to hosted HTML; original concept/image links stay in the separate offline package. Sound starts off on every load. The initial release was published on 10 October 2026 from approved website commit `963ed70`. The requested URL correction to `/fun/girl-in-fire/` is prepared locally for the next approved deployment; the old `/fun/tanja/` page will redirect there. See [Girl in Fire publishing and verification](docs/TANJA.md).
 
 See [the TicTacToe publishing guide](docs/TICTACTOE.md) for the complete update steps and screenshot instructions.
 
@@ -68,7 +68,7 @@ See [Publishing and updating the games](docs/PUBLISHING.md) for the full procedu
 
 ## Analytics
 
-Hosted pages use Umami Cloud for pageviews; Footsi and Girl in Fire join that coverage after approved publication. `assets/analytics.js` contains the public website ID and loads the tracker only on `dejans11.github.io`, respecting Do Not Track and excluding URL query strings and fragments. Local previews send no analytics. Game exporters add the shared loader automatically; the Retro Football Manager offline ZIP keeps its original bytes and has no website tracker.
+Hosted pages, including Girl in Fire, use Umami Cloud for pageviews; Footsi joins that coverage after its approved publication. `assets/analytics.js` contains the public website ID and loads the tracker only on `dejans11.github.io`, respecting Do Not Track and excluding URL query strings and fragments. Local previews send no analytics. Game exporters add the shared loader automatically; the Retro Football Manager offline ZIP keeps its original bytes and has no website tracker.
 
 See [Analytics setup and maintenance](docs/ANALYTICS.md) for configuration, excluding your own visits, verification, and disabling collection. The site footer links to the visitor-facing [analytics privacy notice](privacy.html).
 
@@ -79,7 +79,8 @@ See [Analytics setup and maintenance](docs/ANALYTICS.md) for configuration, excl
 - `assets/game-gallery.js`, `assets/vendor/baguettebox/`: screenshot modal setup and the bundled lightbox library, including its license.
 - `fun/blobs/`, `fun/warblade/`, `fun/tictactoe/`: exported playable games.
 - `fun/lale-manager/`: Footsi web game and original offline ZIP.
-- `fun/tanja/`: Girl in Fire runtime export; no original concept or offline ZIP.
+- `fun/girl-in-fire/`: Girl in Fire runtime export; no original concept or offline ZIP.
+- `fun/tanja/`: redirect for old bookmarks; no game runtime or analytics.
 - `scripts/import-games.mjs`: local export tool.
 - `scripts/site-analytics.mjs`: adds the shared analytics loader to exported game HTML.
 - `scripts/tanja-export.mjs`, `tests/import-tanja.test.mjs`: Tanja committed runtime validation, hosted HTML and export regressions.
