@@ -59,13 +59,13 @@ function fixture(t) {
   };
   const previous = { blobs: { commit: 'a'.repeat(40), importedAt: '2026-01-01' }, tanja: { commit: 'b'.repeat(40), importedAt: '2026-01-02' } };
   const prior = () => {
-    write(site, 'fun/tanja/index.html', 'previous working release');
+    write(site, 'fun/girl-in-fire/index.html', 'previous working release');
     write(site, 'fun/blobs/game.js', 'keep this game');
     write(site, 'fun/game-versions.json', JSON.stringify(previous));
   };
   const preserves = result => {
     assert.notEqual(result.status, 0);
-    assert.equal(readFileSync(join(site, 'fun/tanja/index.html'), 'utf8'), 'previous working release');
+    assert.equal(readFileSync(join(site, 'fun/girl-in-fire/index.html'), 'utf8'), 'previous working release');
     assert.deepEqual(JSON.parse(readFileSync(join(site, 'fun/game-versions.json'))), previous);
     assert.equal(readdirSync(site).some(path => path.startsWith('.game-export-')), false);
   };
@@ -78,11 +78,11 @@ function files(directory, prefix = '') {
   }).sort();
 }
 
-test('Tanja exports runtime only, adds Umami/privacy and preserves source and other releases', t => {
+test('Tanja exports runtime to the Girl in Fire URL and preserves source and other releases', t => {
   const f = fixture(t); f.prior();
   const result = f.run(); assert.equal(result.status, 0, result.stderr);
-  assert.deepEqual(files(join(f.site, 'fun/tanja')), Object.keys(f.runtime).sort());
-  const html = readFileSync(join(f.site, 'fun/tanja/index.html'), 'utf8');
+  assert.deepEqual(files(join(f.site, 'fun/girl-in-fire')), Object.keys(f.runtime).sort());
+  const html = readFileSync(join(f.site, 'fun/girl-in-fire/index.html'), 'utf8');
   assert.equal((html.match(/src="\/assets\/analytics\.js"/g) || []).length, 1);
   assert.match(html, /href="\/privacy\.html"/);
   assert.match(html, /<title>Girl in Fire — Paratroopers Over Mostar<\/title>/);
@@ -91,7 +91,7 @@ test('Tanja exports runtime only, adds Umami/privacy and preserves source and ot
   assert.doesNotMatch(html, /View original concept|assets\/reference/);
   for (const [path, bytes] of Object.entries(f.runtime)) {
     assert.equal(readFileSync(join(f.source, path), 'utf8'), bytes);
-    if (path !== 'index.html') assert.equal(readFileSync(join(f.site, 'fun/tanja', path), 'utf8'), bytes);
+    if (path !== 'index.html') assert.equal(readFileSync(join(f.site, 'fun/girl-in-fire', path), 'utf8'), bytes);
   }
   assert.equal(f.git('status', '--porcelain'), '');
   assert.equal(readFileSync(join(f.site, 'fun/blobs/game.js'), 'utf8'), 'keep this game');
@@ -99,15 +99,17 @@ test('Tanja exports runtime only, adds Umami/privacy and preserves source and ot
   assert.deepEqual(versions.blobs, f.previous.blobs);
   assert.equal(versions.tanja.commit, f.git('rev-parse', 'HEAD'));
   assert.equal(versions.tanja.version, '0.1-review');
+  assert.equal(versions.tanja.path, 'fun/girl-in-fire/');
+  assert.equal(existsSync(join(f.site, 'fun/tanja')), false);
   assert.equal(JSON.stringify(versions).includes(f.source), false);
 });
 
 test('Tanja reimport removes stale exports without duplicating analytics', t => {
   const f = fixture(t); assert.equal(f.run().status, 0);
-  f.write(f.site, 'fun/tanja/assets/reference/leaked.png', 'stale private file');
+  f.write(f.site, 'fun/girl-in-fire/assets/reference/leaked.png', 'stale private file');
   assert.equal(f.run().status, 0);
-  assert.equal(existsSync(join(f.site, 'fun/tanja/assets/reference')), false);
-  assert.equal((readFileSync(join(f.site, 'fun/tanja/index.html'), 'utf8').match(/data-site-analytics/g) || []).length, 1);
+  assert.equal(existsSync(join(f.site, 'fun/girl-in-fire/assets/reference')), false);
+  assert.equal((readFileSync(join(f.site, 'fun/girl-in-fire/index.html'), 'utf8').match(/data-site-analytics/g) || []).length, 1);
 });
 
 test('Tanja uses committed manifest and runtime bytes when Git hides local changes', t => {
@@ -116,7 +118,7 @@ test('Tanja uses committed manifest and runtime bytes when Git hides local chang
   f.write(f.source, 'release/player-files.json', 'invalid private working manifest');
   f.write(f.source, 'src/js/scene.js', 'private local script');
   assert.equal(f.run().status, 0);
-  assert.equal(readFileSync(join(f.site, 'fun/tanja/src/js/scene.js'), 'utf8'), f.runtime['src/js/scene.js']);
+  assert.equal(readFileSync(join(f.site, 'fun/girl-in-fire/src/js/scene.js'), 'utf8'), f.runtime['src/js/scene.js']);
 });
 
 test('Tanja dirty checkout is refused without replacing the last release', t => {
