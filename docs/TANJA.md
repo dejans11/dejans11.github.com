@@ -1,4 +1,12 @@
-# Publishing Girl in Fire (Tanja)
+# Girl in Fire — archived publishing record
+
+## Removal requested — 12 October 2026
+
+The user requested removal from `dejans11.github.io`. Removal is prepared locally and awaits approval of its specific website push. The public runtime at `fun/girl-in-fire/`, the old `fun/tanja/` redirect, gallery image, navigation, privacy paragraph and release entry are deleted. The website's `--tanja` importer and its dedicated helper are retired. After Pages publishes the approved removal, both game URLs and the former gallery image should return 404.
+
+The local source project and offline package remain available separately. The records below preserve the earlier publication and verification history; their export commands describe the retired integration and are no longer active.
+
+## Historical publication and testing
 
 Girl in Fire is the site's display name for **Tanja — Paratroopers Over Mostar**. Its public address is [Girl in Fire](https://dejans11.github.io/fun/girl-in-fire/); the hosted directory is `girl-in-fire`, while the source name, `--tanja` exporter option and `tanja` version-record key remain unchanged. Sound starts **off on every page load**, including reload. Players can enable it through the Sound button.
 
@@ -12,11 +20,15 @@ The source checkout is `C:\dev\games\tanja` (`main`); the website is `E:\dev\dej
 
 ## Public URL correction
 
-The user requested that the public URL also match Girl in Fire and be deployed. The verified website change is committed locally as `3f46ee9`; its specific push and Pages deployment remain pending. Homepage/Fun links and future `--tanja` exports now target `/fun/girl-in-fire/`; the version record adds `path: "fun/girl-in-fire/"`. The original 29 runtime files are moved unchanged, and the gallery capture is renamed to `assets/games/girl-in-fire.png`. `/fun/tanja/` contains only an analytics-free redirect with a canonical link and a visible fallback link; its previous runtime files are removed.
+The user requested that the public URL also match Girl in Fire and be deployed, then approved the five explicitly listed website commits with “push”. Commits `c2a4502`, `94628b8`, `913a91e` (Footsi) and `3f46ee9`, `854f53f` (Girl in Fire) were pushed to the existing `origin/master`. [Pages deployment38035065782](https://github.com/dejans11/dejans11.github.com/actions/runs/38035065782) succeeded at 07:38:02 UTC on 10 October 2026 for `854f53f61758c15a48c43b54e960201eab7584c6`. No branch was created or renamed; no source push was needed.
 
-Saved best scores survive the route change because the origin and `tanja.bestScore.v1` key are unchanged. The sound setting still resets to off. Initial publication and real Umami evidence below refer to the earlier `/fun/tanja/` release; verify the new actual URL and pageview after the next approved deployment. Website regressions pass72/72, including canonical-directory export/reimport and failure preservation. The pending URL correction is not claimed deployed.
+Homepage/Fun links and future `--tanja` exports now target `/fun/girl-in-fire/`; the version record adds `path: "fun/girl-in-fire/"`. The original 29 runtime files are moved unchanged, and the gallery capture is renamed to `assets/games/girl-in-fire.png`. `/fun/tanja/` contains only an analytics-free redirect with a canonical link and a visible fallback link; its previous runtime files are removed. At 07:39 UTC, all36 checked public files matched the deployed commit by SHA-256, including both catalogue pages and the redirect. The new concept path returns404. Post-push documentation updates remain local and uncommitted for review.
+
+Saved best scores survive the route change because the origin and `tanja.bestScore.v1` key are unchanged. The sound setting still resets to off. Initial publication evidence below refers to the earlier `/fun/tanja/` release; the URL correction is now published at `/fun/girl-in-fire/`. Website regressions pass72/72, including canonical-directory export/reimport and failure preservation.
 
 Private Chrome154 completes a native-input ten-visitor/two-boss/1200 round at the new loopback URL, with pause/audio/replay/title/no11/best reload and initial/reload Sound off. Revisiting the old bookmark redirects correctly and retains best1200 with Sound off. Final run has zero page/console errors or failed requests and sends no local analytics. All29 runtime files and the gallery image match the initial published bytes.
+
+Published acceptance at the new actual URL also passes in Chrome154.0.8037.98: ten encounters, two bosses,1200 points, native Canvas input, real audio, pause/replay/title/no11, saved best1200 and initial/reload Sound off. Old-bookmark navigation reaches `/fun/girl-in-fire/` with best1200 retained and Sound off. No page/console errors, failed requests or original-concept requests. Real Umami collection returned200 for the new path with query/fragment excluded; no old-route pageview was submitted. Authenticated dashboard display remains unchecked. The private browser is closed; latest records remain local and uncommitted.
 
 ## Export and preview
 

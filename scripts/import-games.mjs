@@ -2,16 +2,14 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, extname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { withSiteAnalytics } from './site-analytics.mjs';
-import { publicTanjaHtml, tanjaRelease } from './tanja-export.mjs';
 
 const games = {
   blobs: { files: ['index.html', 'style.css', 'game.js', 'solver.js'], assets: false },
   warblade: { files: ['index.html', 'style.css', 'game.js'], assets: true },
-  tanja: { files: ['index.html'], assets: false, directory: 'girl-in-fire' },
 };
 const assetExtensions = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg', '.avif', '.ico', '.mp3', '.ogg', '.wav', '.woff', '.woff2', '.ttf']);
 const excludedDirectories = new Set(['source', 'blender', 'tools', 'tests', 'docs', 'plans', 'node_modules']);
-const usage = 'Usage: node scripts/import-games.mjs [--blobs <clean-checkout>] [--warblade <clean-checkout>] [--tanja <clean-checkout>]\nSupply one or more games. Run from the profile repository root.';
+const usage = 'Usage: node scripts/import-games.mjs [--blobs <clean-checkout>] [--warblade <clean-checkout>]\nSupply one or more games. Run from the profile repository root.';
 
 function inside(parent, child) {
   const path = relative(resolve(parent), resolve(child));
@@ -70,16 +68,11 @@ function prepare(slug, input) {
     ? tree.split('\0').map(entry => entry.slice(entry.indexOf('\t') + 1)).filter(supportedAsset)
     : [];
   const localAssets = games[slug].assets ? runtimeAssets(source).map(file => file.split(sep).join('/')) : [];
-  const readCommitted = file => {
-    if (!objects.has(file)) throw new Error(`${slug}: missing runtime/manifest file ${file} in the regular source commit.`);
-    return execFileSync('git', ['-C', source, 'cat-file', 'blob', objects.get(file)], { maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
-  };
-  const release = slug === 'tanja' ? tanjaRelease(readCommitted) : null;
-  const files = release ? release.files : [...new Set([...games[slug].files, ...committedAssets, ...localAssets])];
+  const files = [...new Set([...games[slug].files, ...committedAssets, ...localAssets])];
   for (const file of files) {
     if (!objects.has(file)) throw new Error(`${slug}: runtime file ${file} is not a regular file in the source commit. Commit it or remove it from the runtime directory.`);
   }
-  return { slug, directory: games[slug].directory ?? slug, source, commit, files, objects, version: release?.version };
+  return { slug, source, commit, files, objects };
 }
 
 function main(args) {
@@ -99,8 +92,8 @@ function main(args) {
   if (existsSync(fun) && (lstatSync(fun).isSymbolicLink() || !lstatSync(fun).isDirectory())) throw new Error('The Fun output must be a real directory.');
   const manifest = join(fun, 'game-versions.json');
   const versions = existsSync(manifest) ? JSON.parse(readFileSync(manifest, 'utf8')) : {};
-  for (const { slug, directory } of exports) {
-    const destination = join(fun, directory);
+  for (const { slug } of exports) {
+    const destination = join(fun, slug);
     inside(fun, destination);
     if (existsSync(destination) && (lstatSync(destination).isSymbolicLink() || !lstatSync(destination).isDirectory())) throw new Error(`${slug}: existing output must be a real directory.`);
   }
@@ -115,12 +108,12 @@ function main(args) {
         mkdirSync(dirname(destination), { recursive: true });
         const bytes = execFileSync('git', ['-C', source, 'cat-file', 'blob', objects.get(file)], { maxBuffer: 64 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
         writeFileSync(destination, file === 'index.html'
-          ? (slug === 'tanja' ? publicTanjaHtml(bytes.toString('utf8')) : withSiteAnalytics(bytes.toString('utf8'))) : bytes);
+          ? withSiteAnalytics(bytes.toString('utf8')) : bytes);
       }
     }
     mkdirSync(fun, { recursive: true });
-    for (const { slug, directory, commit, version } of exports) {
-      const destination = join(fun, directory);
+    for (const { slug, commit } of exports) {
+      const destination = join(fun, slug);
       const backup = join(staging, slug + '.previous');
       const hadPrevious = existsSync(destination);
       if (hadPrevious) renameSync(destination, backup);
@@ -128,8 +121,6 @@ function main(args) {
       replaced.push(replacement);
       renameSync(join(staging, slug), destination);
       versions[slug] = { commit, importedAt: new Date().toISOString() };
-      if (version) versions[slug].version = version;
-      if (directory !== slug) versions[slug].path = `fun/${directory}/`;
     }
     writeFileSync(manifest, JSON.stringify(versions, null, 2) + '\n');
   } catch (error) {

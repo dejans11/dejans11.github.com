@@ -17,11 +17,5 @@
     ],
     "importedAt": "2026-10-10T07:12:13.046Z",
     "screenshotSha256": "3521b77623114a19e6edd7cccee73e3bb9498bb59d2669d25f28646ea6fd5d42"
-  },
-  "tanja": {
-    "commit": "2a6d9c4369bf4b27dc532af988439b3da388ebc4",
-    "importedAt": "2026-10-10T06:30:15.077Z",
-    "version": "0.1-review",
-    "path": "fun/girl-in-fire/"
   }
 }

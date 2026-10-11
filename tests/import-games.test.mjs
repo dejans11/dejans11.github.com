@@ -54,6 +54,17 @@ function files(directory, prefix = '') {
   }).sort();
 }
 
+test('the removed Girl in Fire game cannot be restored through the importer', t => {
+  const { site, sources, run } = fixture(t);
+  const result = run('--tanja', sources.blobs);
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /Unknown option/);
+  assert.equal(existsSync(join(site, 'fun')), false);
+  const help = run('--help');
+  assert.equal(help.status, 0, help.stderr);
+  assert.doesNotMatch(help.stdout, /--tanja/);
+});
+
 test('exports the playable files while excluding private development files', t => {
   const { site, sources, run } = fixture(t);
   const result = run('--blobs', sources.blobs, '--warblade', sources.warblade);

@@ -80,11 +80,9 @@ The game's `npm run prepare:web -- --site <website-folder>` runs tests/build/exp
 
 Footsi is prepared locally; its initial website commits are approved, and remote publication awaits approval of the exact push. Its development chat and source-side publishing handoff are linked in [the game publishing guide](LALE-MANAGER.md). Update both guides before preparing a release; the offline ZIP also contains the source README, so changes to that README require rebuilding and exporting.
 
-## Export Girl in Fire (Tanja)
+## Retired game
 
-The static game uses the public name **Girl in Fire** at `/fun/girl-in-fire/`. The URL correction is prepared locally; `/fun/tanja/` becomes a redirect after its approved deployment. From this website root, run `npm run import:games -- --tanja "C:\dev\games\tanja"` against a clean committed source checkout. Source allowlist/asset hashes select 29 runtime files; hosted HTML alone gains the name, privacy link and shared Umami loader. The original concept/link stay only in the separate offline package. Sound starts off on every load.
-
-Preview/test/review before committing. Initial publication succeeded on 10 October 2026 at website commit `963ed70`, following approval of its exact push. Future exports are local preparation until separately approved publication. See [Girl in Fire update, acceptance and rollback](TANJA.md). The exporter preserves other games/version entries and never commits or pushes.
+The user requested removal of Girl in Fire on 12 October 2026. The local website no longer includes its runtime, gallery image, navigation, old-address redirect or release-manifest entry. The `--tanja` importer option is retired, so routine exports cannot restore it. After the specifically approved removal push and successful Pages deployment, verify that `/fun/girl-in-fire/`, `/fun/tanja/` and `/assets/games/girl-in-fire.png` return 404 and that the remaining games still work. See the [archived publishing record](TANJA.md).
 
 ## Export TicTacToe
 
@@ -114,7 +112,6 @@ Open http://127.0.0.1:8080/, follow **Fun**, and test the games. Also open each 
 - http://127.0.0.1:8080/fun/warblade/
 - http://127.0.0.1:8080/fun/tictactoe/
 - http://127.0.0.1:8080/fun/lale-manager/
-- http://127.0.0.1:8080/fun/girl-in-fire/
 
 Blobs: select a blob and jump to a highlighted landing cell. Check the help and level controls.
 
